@@ -32,10 +32,9 @@ int gcd(int a, int b){
 class DSU
 {
     public:
-    vector<int> rank,parent,size;
+    vector<int> parent,size;
     DSU(int n)
     {
-        rank.resize(n+1,0);
         parent.resize(n+1);
         size.resize(n+1,1);
         for(int i = 0;i<=n;i++)
@@ -46,25 +45,6 @@ class DSU
         if(parent[node] == node)
             return node;
         return  parent[node] = findParent(parent[node]);
-    }
-    void UnionByRank(int u,int v)
-    {
-        int ultParent_u = findParent(u);
-        int ultParent_v = findParent(v);
-        if(ultParent_u == ultParent_v)return;
-        if(rank[ultParent_u] < rank[ultParent_v])
-        {
-            parent[ultParent_u] = ultParent_v;
-        }
-        else if(rank[ultParent_v] < rank[ultParent_u])
-        {
-            parent[ultParent_v] = ultParent_u;
-        }
-        else
-        {
-            parent[ultParent_v] = ultParent_u;
-            rank[ultParent_u]++;
-        }
     }
     void UnionBySize(int u,int v)
     {
@@ -83,18 +63,39 @@ class DSU
         }
     }
 };
+
+
+void solve()
+{
+	int n,m;
+	cin>>n>>m;
+	DSU ds(n+1);
+	set<int> set;
+	for(int i = 0;i<m;i++)
+	{
+		int u,v;
+		cin>>u>>v;
+		if(ds.findParent(u)!=ds.findParent(v))
+		{
+			ds.UnionBySize(u,v);
+		}
+	}
+    for(int i = 0;i<n+1;i++)
+    {
+        set.insert(ds.parent[i]);
+    }
+    cout<<set.size()-1<<endl;
+	int a = *set.begin();
+    for(auto it : set)
+    {
+        if(it == a)
+            continue;
+        else
+            cout<<a<<" "<<it<<endl;
+    }
+}
+
 int32_t main()
 {
-    //[0,2],[0,5],[2,4],[1,6],[5,4]
-    DSU ds(7);
-    ds.UnionBySize(0,2);
-    ds.UnionBySize(0,5);
-    ds.UnionBySize(2,4);
-    ds.UnionBySize(1,6);
-    ds.UnionBySize(5,4);
-    for(int i = 0;i<7;i++)
-        cout<<ds.size[i]<<endl;
-    // cout<<boolalpha<<(ds.findParent(3) == ds.findParent(7))<<endl;
-    // ds.UnionByRank(3,7);
-    // cout<<boolalpha<<(ds.findParent(3) == ds.findParent(7))<<endl;
+	solve();
 }
