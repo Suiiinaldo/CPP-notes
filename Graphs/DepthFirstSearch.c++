@@ -32,6 +32,17 @@ int main()
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
+    cout<<"Adjacency List is \n";
+    for(int i=0;i<n;i++)
+    {
+        cout<<i<<" -> ";
+        for(auto it : adj[i])
+        {
+            cout<<it<<" ";
+        }
+        cout<<endl;
+    }
+    cout<<"DFS of the Graph is\n";
     vector<int> ls = dfsofGraph(n,adj);
     for(auto it: ls)
     {

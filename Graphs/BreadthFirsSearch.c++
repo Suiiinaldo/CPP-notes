@@ -37,6 +37,7 @@ int main()
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
+    cout<<"Adjacency List is\n";
     for(int i=0;i<n;i++)
     {
         cout<<i<<" -> ";
@@ -46,6 +47,7 @@ int main()
         }
         cout<<endl;
     }
+    cout<<"BFS of the Graph is\n";
     vector<int> ls = bfs(n,adj);
     for(auto it: ls)
     {
@@ -53,4 +55,12 @@ int main()
     }
     cout<<endl;
     return 0;
+/*
+0 1 
+0 2
+0 3
+1 4
+2 3
+3 4
+*/
 }

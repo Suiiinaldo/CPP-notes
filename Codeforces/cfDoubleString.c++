@@ -11,41 +11,22 @@ using namespace std;
 void solve()
 {
     int n;
-    cin>>n;
-    string res="";
-    // vector<string> re;
-    map<string, int>mp;
-    for(int i=0;i<n;i++)
-    {
-        string s;
-        cin>>s;
-        mp.insert({s,i});
-        // re.push_back(s);
-    }
-    for(int i=0;i<n;i++)
-    {
-        res+="0";
-    }
-    // showmap(mp);
-    for(auto k=mp.begin();k!=mp.end();++k)
-    {
-        string str=k->first;int f=0;int zx=k->second;
-        for (int i = 1; i < str.length(); i++)
-        {
-            string sub= str.substr(0, i);
-            string subse=str.substr(i,str.length());
-            // cout<<sub<<" "<<subse<<endl;
-            if(mp.find(sub)!=mp.end() and mp.find(sub)!=k and mp.find(subse)!=mp.end())
-            {
-                // cout<<sub<<" "<<subse<<endl;
-                res[zx]='1';f=1;goto abc;
-            }
-        }
-        abc:
-        if(f==0)
-        res[zx]='0';
-    }
-    cout<<res<<endl;
+	cin >> n;
+	string s[n];
+	map<string, bool> mp;
+	for (int i = 0; i < n; i++) {
+		cin >> s[i];
+		mp[s[i]] = true;
+	}
+	for (int i = 0; i < n; i++) {
+		bool ok = false;
+		for (int j = 1; j < s[i].length(); j++) {
+			string pref = s[i].substr(0, j), suff = s[i].substr(j, s[i].length() - j);
+			if (mp[pref] && mp[suff]) {ok = true;}	
+		}
+		cout << ok;
+	}
+	cout << '\n';
 }
 int main()
 {

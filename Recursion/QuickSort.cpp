@@ -32,6 +32,9 @@ int main()
 {
     vector<int> v = {3,1,2,4,1,5,2,6,4};
     int n = 9;
+    cout<<"The Unsorted Array is\n";
+    showvec(v);
     quickSort(v,0,n-1);
+    cout<<"The Sorted Array is\n";
     showvec(v);
 }

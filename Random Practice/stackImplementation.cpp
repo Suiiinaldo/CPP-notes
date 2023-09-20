@@ -60,8 +60,8 @@ int main()
     cout<<"Press 3 for top Element\n";
     cout<<"Press 4 for Exit\n";
     int a;
-    for(int i =0;i<size;i--)
-    {
+    abc:
+    do{
         cout<<"Enter your Choice\n";
         cin>>a;
         switch(a)
@@ -72,7 +72,8 @@ int main()
                 cin>>x;
                 ob.push(x); break;
             case 2:
-                ob.pop(); break;
+                ob.pop(); 
+                cout<<"Item deleted Successfully\n";break;
             case 3:
             if(ob.peek() !=-1)
             cout<<"The top element is "<<ob.peek()<<endl; 
@@ -81,8 +82,8 @@ int main()
                 cout<<"\n";
             }
             break;
-            case 4: return;
+            case 4: break;
             default: cout<<"Inavlid choice\n";
         }
-    }
+    }while(a!=4);
 }
