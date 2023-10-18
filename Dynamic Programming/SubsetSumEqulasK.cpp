@@ -29,38 +29,38 @@ int main()
     // vector<vector<int>> dp(n,vector<int>(k+1,-1));  //Array of Ind X Target
     // cout<<boolalpha<<subsetEquals(v,k,n-1,dp)<<endl; //Memoization
 
-    //Tabulation
-    // vector<vector<bool>> dp(n,vector<bool>(k+1,false));  //Array of Ind X Target
-    // for(int i = 0;i<n;i++)
-    //     dp[i][0] = true;
-    // if(nums[0] <=k) dp[0][v[0]] = true;
-    // for(int ind = 1;ind<n;ind++)
-    // {
-    //     for(int j = 1;j<=k;j++)
-    //     {
-    //         bool not_take = dp[ind-1][j];
-    //         bool take = false;
-    //         if(v[ind] <= j)
-    //             take = dp[ind-1][j - v[ind]];
-    //         dp[ind][j] = take | not_take;
-    //     }
-    // }
-
-    //Space Optimised
-    vector<bool> dp(k+1,0),cur(k+1,0);
-    dp[0] = true;
-    if(nums[0] <=k) dp[v[0]] = true;
+    // Tabulation
+    vector<vector<bool>> dp(n,vector<bool>(k+1,false));  //Array of Ind X Target
+    for(int i = 0;i<n;i++)
+        dp[i][0] = true;
+    if(v[0] <=k) dp[0][v[0]] = true;
     for(int ind = 1;ind<n;ind++)
     {
         for(int j = 1;j<=k;j++)
         {
-            bool not_take = dp[j];
+            bool not_take = dp[ind-1][j];
             bool take = false;
             if(v[ind] <= j)
-                take = dp[j - v[ind]];
-            cur[j] = take | not_take;
+                take = dp[ind-1][j - v[ind]];
+            dp[ind][j] = take | not_take;
         }
-        dp = cur;
     }
+
+    //Space Optimised
+    // vector<bool> dp(k+1,0),cur(k+1,0);
+    // dp[0] = true;
+    // if(nums[0] <=k) dp[v[0]] = true;
+    // for(int ind = 1;ind<n;ind++)
+    // {
+    //     for(int j = 1;j<=k;j++)
+    //     {
+    //         bool not_take = dp[j];
+    //         bool take = false;
+    //         if(v[ind] <= j)
+    //             take = dp[j - v[ind]];
+    //         cur[j] = take | not_take;
+    //     }
+    //     dp = cur;
+    // }
     cout<<boolalpha<<dp[k]<<endl;
 }

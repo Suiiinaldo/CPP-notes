@@ -17,9 +17,10 @@ int jumps(int ind,vector<int> &v,vector<int> &dp,int k)
 }
 void solve()
 {
-    int n,k;
-    cin>>n>>k;
+    int n;
+    cin>>n;
     vector<int> v(n);
+    int k = 3;
     for(int i = 0;i<n;i++)
         cin>>v[i];
     vector<int> dp(n+1,-1);
