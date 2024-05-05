@@ -1,58 +1,49 @@
-#include<iostream>
-#define upper(s) transform(s.begin(),s.end(),s.begin(),::toupper)
-#define lower(s) transform(s.begin(),s.end(),s.begin(),::tolower)
-#define all(s) s.begin(),s.end()
-#define showvec(v) for(int i=0;i<v.size();i++) cout<<v[i];cout<<endl
-#define ll long long
+#include<bits/stdc++.h>
 using namespace std;
 class stack
 {
     public:
-    int *arr;
-    int top;
-    int size;
+    int *arr,top,size;
     stack(int size)
     {
-        this->size=size;
-        top=-1;
-        arr=new int[size];
+        this->size = size;
+        top = -1;
+        arr = new int[size];
     }
     void push(int x)
     {
-        if(size-top>1)
-            arr[++top]=x;
+        if(top == size - 1)
+            cout<<"Stack Overflow\n";
         else
-        cout<<"StackOverflow\n";
+            arr[++top] = x;
     }
     void pop()
     {
-        if(top==-1)
-        cout<<"StackUnderflow\n";
+        if(empty())
+            cout<<"Stack Underflow\n";
         else
-        top--;
+            top--;
     }
     int peek()
     {
-        if(top>=0 )
-        return arr[top];
+        if(!empty())
+            return arr[top];
         else
         {
-            cout<<"StackIsEmpty\n";
+            cout<<"Stack is Empty\n";
             return -1;
         }
     }
     bool empty()
     {
         if(top==-1)
-        return true;
+            return true;
         else 
-        return false;
+            return false;
     }
 };
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);cout.tie(nullptr);
     stack st(6);
     st.push(1);
     st.push(2);
@@ -61,9 +52,9 @@ int main()
     st.push(5);
     st.push(6);
     if(st.empty())
-    cout<<"Empty\n";
+        cout<<"Empty\n";
     else
-    cout<<"Not Empty\n";
+        cout<<"Not Empty\n";
     cout<<st.peek()<<endl;
     st.pop();
     cout<<st.peek()<<endl;
